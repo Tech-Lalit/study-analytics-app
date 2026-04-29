@@ -8,6 +8,7 @@ const cors = require('cors');
 const app = express();
 app.use(express.json());
 app.use(cors()); // CRITICAL: This must be before your routes
+const DB_URL = process.env.MONGO_URI;
 
 // 1. Connection
 mongoose.connect(DB_URL)
