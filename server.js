@@ -1,6 +1,6 @@
 const { setServers } = require('dns').promises;
 setServers(["1.1.1.1", "8.8.8.8"]); 
-
+require('dotenv').config(); // Load variables from .env
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
@@ -10,7 +10,7 @@ app.use(express.json());
 app.use(cors()); // CRITICAL: This must be before your routes
 
 // 1. Connection
-mongoose.connect('mongodb+srv://such101105_db_user:aWe0T1iEfNLsdPmW@cluster0.r7xtzxf.mongodb.net/?appName=Cluster0')
+mongoose.connect(DB_URL)
     .then(() => console.log('✅ MongoDB Connected'))
     .catch(err => console.error('❌ MongoDB Error:', err));
 
