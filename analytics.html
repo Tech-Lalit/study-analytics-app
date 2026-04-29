@@ -1,23 +1,53 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Analytics</title>
+    <title>Study Analytics</title>
+    <script>
+        if (!localStorage.getItem("user")) {
+            window.location.replace("index.html");
+        }
+    </script>
     <link rel="stylesheet" href="style.css">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
 </head>
 <body>
 
-<div class="container">
-   <h1>📊 Analytics Dashboard</h1>
+    <div class="analytics-container">
+        <h1>Study Overview</h1>
+        
+        <div class="streak-header">
+            <div class="streak-card">
+                <span class="label">Current Streak</span>
+                <span class="count" id="currStreak">00</span>
+            </div>
+            <div class="streak-card">
+                <span class="label">Total Sessions</span>
+                <span class="count" id="totalSessions">00</span>
+            </div>
+        </div>
 
-    <canvas id="chart" width="300" height="300"></canvas>
+        <div class="calendar-box">
+            <h3 id="monthDisplay">Month</h3>
+            <div class="calendar-grid" id="calendarGrid">
+                </div>
+        </div>
 
-    <div id="report"></div>
-    <div id="insight"></div>
+        <div id="report"></div>
 
-    <button onclick="goBack()">Back</button>
-</div>
+        <div class="chart-wrapper">
+            <canvas id="chart"></canvas>
+        </div>
+        
+        <button class="btn-back" onclick="goBack()">Back to Dashboard</button>
+    </div>
 
-<script src="app.js"></script>
+    <script src="app.js"></script>
+
+    <button class="theme-toggle-btn" onclick="toggleDarkMode()" title="Toggle Dark Mode">
+        🌙
+    </button>
+    
+    <script src="app.js"></script>
+    </body>
 </body>
 </html>

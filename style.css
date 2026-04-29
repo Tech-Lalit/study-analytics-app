@@ -1,103 +1,227 @@
+:root {
+    --primary: #4361ee;
+    --bg: #f4f7fe;
+}
+
 body {
+    font-family: 'Inter', sans-serif;
+    background: var(--bg);
     margin: 0;
-    font-family: 'Segoe UI', sans-serif;
-    background: linear-gradient(135deg, #667eea, #764ba2);
+    /* REMOVED: height: 100vh and display: flex from here */
+    padding: 20px; /* Gives space when scrolling on mobile */
+}
+
+/* New wrapper to handle centering without breaking long content */
+.page-wrapper {
     display: flex;
     justify-content: center;
-    align-items: center;
-    height: 100vh;
+    align-items: flex-start; /* Start from top so it can scroll */
+    min-height: 100vh;
 }
 
-/* Card container */
 .container {
     background: white;
-    padding: 30px;
-    border-radius: 15px;
-    width: 320px;
-    box-shadow: 0px 10px 25px rgba(0,0,0,0.2);
+    padding: 2.5rem;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    width: 100%;
+    max-width: 400px; /* Slightly wider for better chart display */
     text-align: center;
+    margin: auto; /* Centers horizontally */
 }
 
-/* Heading */
-h1 {
-    margin-bottom: 20px;
-    color: #333;
+/* Analytics Specific Container - Ensuring it fits the screen */
+.analytics-container {
+    width: 100%;
+    max-width: 500px;
+    margin: 0 auto; /* Centers it */
+    background: #fff;
+    padding: 25px;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+    text-align: center;
+    box-sizing: border-box; /* Ensures padding doesn't add to width */
 }
 
-/* Inputs */
-input, select {
+/* FIX: Prevent the chart from overflowing its container */
+.chart-wrapper {
+    margin-top: 30px;
+    position: relative;
+    height: 300px; /* Fixed height for the chart */
+    width: 100%;
+}
+
+.streak-header {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    margin: 20px 0;
+}
+
+.streak-card {
+    background: #f0f4ff;
+    padding: 12px;
+    border-radius: 12px;
+    border-bottom: 4px solid var(--primary);
+    flex: 1;
+}
+
+/* Ensure the calendar grid doesn't stretch weirdly */
+.calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 5px;
+    margin: 15px auto;
+    max-width: 300px; /* Keeps the circles nice and tight */
+}
+
+.day-cell {
+    aspect-ratio: 1 / 1; /* Keeps cells perfectly square/circular */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    cursor: pointer;
+}
+
+.studied-day {
+    background: var(--primary);
+    color: white !important;
+    border-radius: 50%;
+    font-weight: bold;
+}
+
+input, select, button {
     width: 100%;
     padding: 12px;
     margin: 10px 0;
-    border-radius: 8px;
-    border: 1px solid #ccc;
-    outline: none;
-    transition: 0.3s;
+    border-radius: 10px;
+    border: 1px solid #ddd;
+    box-sizing: border-box; /* Crucial for width: 100% */
 }
 
-/* Input focus effect */
-input:focus, select:focus {
-    border-color: #667eea;
-    box-shadow: 0 0 5px rgba(102, 126, 234, 0.5);
-}
-
-/* Buttons */
-button {
-    width: 100%;
-    padding: 12px;
-    margin-top: 10px;
-    border: none;
-    border-radius: 8px;
-    background: #667eea;
-    color: white;
-    font-size: 16px;
-    cursor: pointer;
-    transition: 0.3s;
-}
-
-/* Hover effect */
-button:hover {
-    background: #5a67d8;
-    transform: scale(1.03);
-}
-
-/* Back button (secondary style) */
-button:last-child {
-    background: #6c757d;
-}
-
-button:last-child:hover {
-    background: #5a6268;
-}
-button:last-child:hover {
-    background: #5a6268;
-}
-
-/* ================= DARK MODE ================= */
-
+/* Dark Mode Variables */
 .dark-mode {
-    background: #121212 !important;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    --bg: #0f172a; /* Dark navy */
+    --card-bg: #1e293b; /* Lighter navy for cards */
+    --text: #f1f5f9;
+    --border: #334155;
 }
 
-.dark-mode .container {
-    background: #1e1e1e;
-    color: white;
+/* Update your existing styles to use these variables */
+body {
+    transition: background 0.3s ease; /* Smooth transition */
+    background: var(--bg);
+    color: var(--text, #333); /* Fallback to dark grey */
 }
 
-.dark-mode input,
+.container, .analytics-container, .streak-card {
+    background: var(--card-bg, white); /* Uses dark color if class exists */
+    color: var(--text, #333);
+    border-color: var(--border, #ddd);
+}
+
+/* Ensure inputs look good in dark mode */
+.dark-mode input, 
 .dark-mode select {
-    background: #2c2c2c;
+    background: #334155;
     color: white;
-    border: 1px solid #555;
+    border: 1px solid #475569;
 }
 
-.dark-mode button {
-    background: #bb86fc;
+/* Theme Variables */
+:root {
+    --primary: #4361ee;
+    --bg: #f4f7fe;
+    --card-bg: #ffffff;
+    --text: #1e293b;
+    --border: #e2e8f0;
 }
 
-.dark-mode button:hover {
-    background: #9b6ce0;
+/* Dark Mode Overrides */
+body.dark-mode {
+    --bg: #0f172a;
+    --card-bg: #1e293b;
+    --text: #f1f5f9;
+    --border: #334155;
+}
+
+body {
+    background: var(--bg);
+    color: var(--text);
+    transition: background 0.3s, color 0.3s;
+    margin: 0;
+    min-height: 100vh;
+}
+
+/* The Fixed Floating Button */
+.theme-toggle-btn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: var(--primary);
+    color: white;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    transition: transform 0.2s;
+}
+
+.theme-toggle-btn:hover {
+    transform: scale(1.1);
+}
+
+/* Ensure existing components use the variables */
+.container, .analytics-container, .streak-card, .stat-card {
+    background: var(--card-bg);
+    color: var(--text);
+    border: 1px solid var(--border);
+}
+
+input, select {
+    background: var(--card-bg);
+    color: var(--text);
+    border: 1px solid var(--border);
+}
+.timer-display {
+    font-size: 5rem;
+    font-weight: 800;
+    color: var(--primary);
+    margin: 30px 0;
+    font-family: 'Courier New', Courier, monospace; /* Digital feel */
+    letter-spacing: -2px;
+}
+
+.break-options button {
+    flex: 1;
+    padding: 8px;
+}
+
+.timer-inputs {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.timer-inputs input[type="text"] {
+    flex: 2;
+}
+
+.timer-inputs input[type="number"] {
+    flex: 1;
+}
+
+#timerDisplay {
+    font-family: 'Courier New', monospace;
+    font-size: 5rem;
+    color: var(--primary);
+    margin: 20px 0;
 }

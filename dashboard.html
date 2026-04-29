@@ -2,6 +2,12 @@
 <html>
 <head>
     <title>Dashboard</title>
+    <script>
+        // Inline script runs BEFORE the page renders
+        if (!localStorage.getItem("user")) {
+            window.location.replace("index.html");
+        }
+    </script>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -11,9 +17,25 @@
 
     <button onclick="goToAdd()">Add Study Session</button>
     <button onclick="goToAnalytics()">View Analytics</button>
+    <button onclick="goToPomodoro()" style="background: #8b5cf6;">⏱️ Focus Mode (Pomodoro)</button>
     <button onclick="logout()">Logout</button>
+    
+</div>
+
+<div class="goal-container">
+    <p>Weekly Goal: <span id="progress-text">12/20 Hours</span></p>
+    <div style="background: #eee; border-radius: 10px;">
+        <div id="progress-bar" style="width: 60%; background: #4361ee; height: 10px; border-radius: 10px;"></div>
+    </div>
 </div>
 
 <script src="app.js"></script>
+
+<button class="theme-toggle-btn" onclick="toggleDarkMode()" title="Toggle Dark Mode">
+    🌙
+</button>
+
+<script src="app.js"></script>
+</body>
 </body>
 </html>

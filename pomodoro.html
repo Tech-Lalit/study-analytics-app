@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Focus Mode</title>
+    <script>
+        if (!localStorage.getItem("user")) window.location.replace("index.html");
+    </script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="analytics-container">
+        <h1>⏳ Focus Session</h1>
+        
+        <div class="timer-display" id="timerDisplay">25:00</div>
+        
+        <div class="timer-inputs">
+            <input type="text" id="timerSubject" placeholder="Subject Name (e.g. Maths)">
+            <input type="number" id="customMinutes" placeholder="Minutes (e.g. 25)" min="1">
+        </div>
+
+        <div class="timer-controls">
+            <button onclick="startTimer()" id="startBtn">Start Session</button>
+            <button onclick="stopTimer()" id="stopBtn" style="background: #ef4444; display: none;">Stop & Save</button>
+            <button onclick="resetTimer()" id="resetBtn" style="background: #64748b;">Reset</button>
+        </div>
+
+        <button class="btn-back" onclick="goBack()">Exit Focus Mode</button>
+    </div>
+
+    <button class="theme-toggle-btn" onclick="toggleDarkMode()">🌙</button>
+
+    <script src="app.js"></script>
+</body>
+</html>
